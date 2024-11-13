@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Met à jour la liste des paquets
+sudo apt update
+
+# Installe les dépendances pour autoriser l'installation depuis HTTPS
+sudo apt install -y curl
+
+# Télécharge et exécute le script d'installation de Node.js 20.x depuis NodeSource
+curl -sL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+
+# Installe Node.js et npm
+sudo apt install -y nodejs
+
+# Vérifie si les commandes sont bien installées et disponibles
+if command -v node &> /dev/null && command -v npm &> /dev/null; then
+  echo "Node.js et npm ont été installés avec succès."
+else
+  echo "Erreur : Node.js ou npm n'a pas pu être installé."
+  exit 1
+fi
+
+# Affiche les versions de Node.js et npm pour confirmation
+node -v
+npm -v
+
+# Initialise un projet npm (en acceptant les paramètres par défaut)
+npm init -y
+
+# Installe Jest, Babel et ESLint en tant que dépendances de développement
+npm install --save-dev jest
+npm install --save-dev babel-jest @babel/core @babel/preset-env
+npm install --save-dev eslint
+
+echo "Jest, Babel et ESLint ont été installés avec succès."
