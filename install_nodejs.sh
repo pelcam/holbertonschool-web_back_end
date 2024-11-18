@@ -4,18 +4,23 @@
 echo "Exécution de nodesource_setup.sh..."
 ./nodesource_setup.sh
 
-# Installer Node.js
+# Installer Node.js et NPM
 echo "Installation de Node.js..."
-pip install nodejs
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -  # Install Node.js setup script (using version 18)
+apt-get install -y nodejs  # Install Node.js and npm
 
 # Vérifier la version de Node.js
 echo "Vérification de la version de Node.js installée..."
-nodejs -v
-
-# Installer npm avec pip (si nécessaire)
-echo "Installation de npm avec pip..."
-pip install npm
+node -v  # Check Node.js version
 
 # Vérifier la version de npm
 echo "Vérification de la version de npm installée..."
-npm -v
+npm -v  # Check npm version
+
+# Installer Jest, Babel, et ESLint
+echo "Installation des dépendances pour Jest, Babel, et ESLint..."
+npm install --save-dev jest
+npm install --save-dev babel-jest @babel/core @babel/preset-env @babel/node
+npm install --save-dev eslint
+
+echo "Installation terminée !"
